@@ -1,5 +1,5 @@
 # gradle 好大
-FROM gradle:jdk14
+FROM gradle:jdk11
 WORKDIR /app
 COPY build.gradle gradle settings.gradle .project miniplc0-java.iml .classpath /app/
 COPY src /app/src
