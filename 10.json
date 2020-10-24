@@ -1,0 +1,12 @@
+{
+  "output": [
+    {
+      "ret_code": 1,
+      "command": "[\"sh\", \"-c\", \"java -jar build/libs/miniplc0java.jar -l \\\"/tests/10.in\\\" -o \\\"/tests/10.plc0\\\"\"]",
+      "stdout": "",
+      "stderr": "Exception in thread \"main\" java.lang.Error: Not implemented\n\tat miniplc0java.analyser.Analyser.analyseMain(Analyser.java:206)\n\tat miniplc0java.analyser.Analyser.analyseProgram(Analyser.java:198)\n\tat miniplc0java.analyser.Analyser.analyse(Analyser.java:37)\n\tat miniplc0java.App.main(App.java:100)\n"
+    }
+  ],
+  "stdoutDiff": null,
+  "message": "Return code check failed"
+}

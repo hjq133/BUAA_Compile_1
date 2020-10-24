@@ -202,10 +202,15 @@ public final class Analyser {
         expect(TokenType.EOF);
     }
 
+    // <主过程> ::= <常量声明><变量声明><语句序列>
     private void analyseMain() throws CompileError {
-        throw new Error("Not implemented");
+        analyseConstantDeclaration();
+        analyseVariableDeclaration();
+        analyseStatement();
     }
 
+    // <常量声明> ::= {<常量声明语句>}
+    //<常量声明语句> ::= 'const'<标识符>'='<常表达式>';'
     private void analyseConstantDeclaration() throws CompileError {
         // 示例函数，示例如何解析常量声明
         // 如果下一个 token 是 const 就继续
@@ -224,6 +229,7 @@ public final class Analyser {
         }
     }
 
+    // <变量声明> ::= {<变量声明语句>}
     private void analyseVariableDeclaration() throws CompileError {
         throw new Error("Not implemented");
     }
@@ -236,14 +242,28 @@ public final class Analyser {
         throw new Error("Not implemented");
     }
 
+    // <常表达式> ::= [<符号>]<无符号整数>
     private void analyseConstantExpression() throws CompileError {
-        throw new Error("Not implemented");
+        boolean negate;
+        if (nextIf(TokenType.Minus) != null) {
+            negate = true;
+            instructions.add(new Instruction(Operation.LIT, 0));
+        } else {
+            nextIf(TokenType.Plus); // 如果有+号,消掉它
+            negate = false;
+        }
+        // TODO 识别无符号整数
     }
 
+    // <表达式> ::= <项>{<加法型运算符><项>}
     private void analyseExpression() throws CompileError {
-        throw new Error("Not implemented");
+        analyseItem();
+        while (nextIf(TokenType.Plus) != null) {
+            analyseExpression();
+        }
     }
 
+    // <赋值语句> ::= <标识符>'='<表达式>';'
     private void analyseAssignmentStatement() throws CompileError {
         throw new Error("Not implemented");
     }
@@ -260,7 +280,7 @@ public final class Analyser {
     private void analyseItem() throws CompileError {
         throw new Error("Not implemented");
     }
-
+    // nextIf: 偷看下一个 token，如果 token 的类型与 tt 相同则前进一个 token 并返回它
     private void analyseFactor() throws CompileError {
         boolean negate;
         if (nextIf(TokenType.Minus) != null) {
@@ -268,7 +288,7 @@ public final class Analyser {
             // 计算结果需要被 0 减
             instructions.add(new Instruction(Operation.LIT, 0));
         } else {
-            nextIf(TokenType.Plus);
+            nextIf(TokenType.Plus); // 如果有+号,消掉它
             negate = false;
         }
 
@@ -278,6 +298,8 @@ public final class Analyser {
             // 调用相应的处理函数
         } else if (check(TokenType.LParen)) {
             // 调用相应的处理函数
+            analyseExpression();
+            expect(TokenType.RParen);
         } else {
             // 都不是，摸了
             throw new ExpectedTokenError(List.of(TokenType.Ident, TokenType.Uint, TokenType.LParen), next());

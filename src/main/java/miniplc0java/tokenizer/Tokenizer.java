@@ -100,9 +100,8 @@ public class Tokenizer {
             // -- 前进一个字符，并存储这个字符
         }
         Pos end = it.currentPos();
-        // TODO 区分大小写吗？
-        if (this.keywordMap.containsKey(val.toLowerCase())) {
-            return new Token(keywordMap.get(val.toLowerCase()), val, begin, end);
+        if (this.keywordMap.containsKey(val)) {
+            return new Token(keywordMap.get(val), val, begin, end);
         } else {
             return new Token(TokenType.Ident, val, begin, end);
         }
