@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ebd99a-57df-4789-b3f1-8079c45bf7f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/10.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/9.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/StringIter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/StringIter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -38,20 +25,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2277">
-              <caret column="31" selection-start-column="8" selection-end-column="31" />
+            <state relative-caret-position="396">
+              <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1092">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="211">
+              <caret line="211" column="5" lean-forward="true" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -111,9 +98,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="377" />
-    <option name="y" value="87" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="290" />
+    <option name="y" value="176" />
     <option name="width" value="1449" />
     <option name="height" value="993" />
   </component>
@@ -156,15 +143,6 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="miniplc0java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BUAA_Compile_1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BUAA_Compile_1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="miniplc0java" type="462c0819:PsiDirectoryNode" />
-              <item name="analyser" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BUAA_Compile_1" type="b2602c69:ProjectViewProjectNode" />
@@ -270,18 +248,18 @@
       <workItem from="1603521175682" duration="6975000" />
       <workItem from="1603547550568" duration="3241000" />
       <workItem from="1603632430961" duration="514000" />
-      <workItem from="1603632970186" duration="607000" />
+      <workItem from="1603632970186" duration="974000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12818000" />
+    <option name="totallyTimeSpent" value="13185000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="25" width="1867" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15971063" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2198108" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -350,17 +328,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="396">
+          <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2277">
-          <caret column="31" selection-start-column="8" selection-end-column="31" />
+        <state relative-caret-position="211">
+          <caret line="211" column="5" lean-forward="true" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
         </state>
       </provider>
     </entry>

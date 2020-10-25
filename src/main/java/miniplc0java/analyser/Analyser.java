@@ -187,6 +187,9 @@ public final class Analyser {
         }
     }
 
+    /**
+     * <程序> ::= 'begin'<主过程>'end'
+     */
     private void analyseProgram() throws CompileError {
         // 程序 -> 'begin' 主过程 'end'
         // 示例函数，示例如何调用子程序
@@ -200,11 +203,16 @@ public final class Analyser {
         expect(TokenType.EOF);
     }
 
+    // <主过程> ::= <常量声明><变量声明><语句序列>
     private void analyseMain() throws CompileError {
         // 主过程 -> 常量声明 变量声明 语句序列
-        throw new Error("Not implemented");
+        analyseConstantDeclaration();
+        analyseVariableDeclaration();
+        //analyseStatement();
     }
 
+    // <常量声明> ::= {<常量声明语句>}
+    //<常量声明语句> ::= 'const'<标识符>'='<常表达式>';'
     private void analyseConstantDeclaration() throws CompileError {
         // 示例函数，示例如何解析常量声明
         // 常量声明 -> 常量声明语句*
@@ -236,6 +244,8 @@ public final class Analyser {
         }
     }
 
+    // <变量声明> ::= {<变量声明语句>}
+    // <变量声明语句> ::= 'var'<标识符>['='<表达式>]';'
     private void analyseVariableDeclaration() throws CompileError {
         // 变量声明 -> 变量声明语句*
 
@@ -266,6 +276,7 @@ public final class Analyser {
         }
     }
 
+    //<语句序列> ::= {<语句>}
     private void analyseStatementSequence() throws CompileError {
         // 语句序列 -> 语句*
         // 语句 -> 赋值语句 | 输出语句 | 空语句
@@ -303,6 +314,7 @@ public final class Analyser {
         return value;
     }
 
+    // <表达式> ::= <项>{<加法型运算符><项>}
     private void analyseExpression() throws CompileError {
         // 表达式 -> 项 (加法运算符 项)*
         // 项
@@ -330,6 +342,7 @@ public final class Analyser {
         }
     }
 
+    // <赋值语句> ::= <标识符>'='<表达式>';'
     private void analyseAssignmentStatement() throws CompileError {
         // 赋值语句 -> 标识符 '=' 表达式 ';'
 
@@ -367,6 +380,7 @@ public final class Analyser {
         instructions.add(new Instruction(Operation.WRT));
     }
 
+    //<项> ::= <因子>{<乘法型运算符><因子>}
     private void analyseItem() throws CompileError {
         // 项 -> 因子 (乘法运算符 因子)*
 
@@ -389,6 +403,7 @@ public final class Analyser {
         }
     }
 
+    // nextIf: 偷看下一个 token，如果 token 的类型与 tt 相同则前进一个 token 并返回它
     private void analyseFactor() throws CompileError {
         // 因子 -> 符号? (标识符 | 无符号整数 | '(' 表达式 ')')
 
