@@ -3,7 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ebd99a-57df-4789-b3f1-8079c45bf7f3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/10.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/9.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/StringIter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/StringIter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -29,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-199">
-              <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="17" />
+            <state relative-caret-position="-2277">
+              <caret column="31" selection-start-column="8" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -38,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1756">
-              <caret line="293" selection-start-line="293" selection-end-line="293" />
+            <state relative-caret-position="1092">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
             </state>
           </provider>
         </entry>
@@ -67,14 +79,15 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Not implemented</find>
-      <find>nextIf</find>
       <find>peek</find>
       <find>next</find>
       <find>analyseExpression</find>
-      <find>analyseConstantExpression</find>
       <find>Ident</find>
-      <find>while</find>
       <find>ident</find>
+      <find>while (nextIf</find>
+      <find>nextIf</find>
+      <find>analyseConstantExpression</find>
+      <find>while</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,24 +106,24 @@
         <option value="$PROJECT_DIR$/7.json" />
         <option value="$PROJECT_DIR$/8.json" />
         <option value="$PROJECT_DIR$/9.json" />
-        <option value="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" />
         <option value="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="301" />
-    <option name="y" value="148" />
-    <option name="width" value="1312" />
-    <option name="height" value="969" />
+    <option name="x" value="377" />
+    <option name="y" value="87" />
+    <option name="width" value="1449" />
+    <option name="height" value="993" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -182,6 +195,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -249,18 +268,20 @@
       <workItem from="1603092149140" duration="650000" />
       <workItem from="1603094404885" duration="831000" />
       <workItem from="1603521175682" duration="6975000" />
-      <workItem from="1603547550568" duration="104000" />
+      <workItem from="1603547550568" duration="3241000" />
+      <workItem from="1603632430961" duration="514000" />
+      <workItem from="1603632970186" duration="607000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8560000" />
+    <option name="totallyTimeSpent" value="12818000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="25" width="1867" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19866444" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15971063" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -298,76 +319,16 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/10.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/4.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/5.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="21" lean-forward="true" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/6.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/7.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/8.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/9.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/1.json" />
+    <entry file="file://$PROJECT_DIR$/10.json" />
+    <entry file="file://$PROJECT_DIR$/2.json" />
+    <entry file="file://$PROJECT_DIR$/3.json" />
+    <entry file="file://$PROJECT_DIR$/4.json" />
+    <entry file="file://$PROJECT_DIR$/5.json" />
+    <entry file="file://$PROJECT_DIR$/6.json" />
+    <entry file="file://$PROJECT_DIR$/7.json" />
+    <entry file="file://$PROJECT_DIR$/8.json" />
+    <entry file="file://$PROJECT_DIR$/9.json" />
     <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/SymbolEntry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -391,15 +352,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1756">
-          <caret line="293" selection-start-line="293" selection-end-line="293" />
+        <state relative-caret-position="1092">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-199">
-          <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="17" />
+        <state relative-caret-position="-2277">
+          <caret column="31" selection-start-column="8" selection-end-column="31" />
         </state>
       </provider>
     </entry>
