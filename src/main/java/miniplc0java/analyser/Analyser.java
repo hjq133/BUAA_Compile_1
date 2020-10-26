@@ -293,8 +293,7 @@ public final class Analyser {
             // 如果下一个 token 是……
             var peeked = peek();
             if (peeked.getTokenType() == TokenType.Ident) { // 如果是标识符
-                expect(TokenType.Equal);
-                analyseExpression();
+                analyseAssignmentStatement();
                 // 调用相应的分析函数
                 // 如果遇到其他非终结符的 FIRST 集呢？
             } else if (peeked.getTokenType() == TokenType.Print) { // 如果是pirnt
@@ -359,6 +358,7 @@ public final class Analyser {
     private void analyseAssignmentStatement() throws CompileError {
         // 赋值语句 -> 标识符 '=' 表达式 ';'
         var nameToken = expect(TokenType.Ident);
+        expect(TokenType.Equal);
         // 分析这个语句
         analyseExpression();
         // 标识符是什么？
@@ -402,12 +402,14 @@ public final class Analyser {
         analyseFactor();
         while (true) {
             // 预读可能是运算符的 token
-            Token op = null;
+            Token op = peek();
+
+            if (op.getTokenType() != TokenType.Mult && op.getTokenType() != TokenType.Div) {
+                break;
+            }
 
             // 运算符
-            if ((op = nextIf(TokenType.Mult)) == null) {
-                op = expect(TokenType.Div);
-            }
+            next();
 
             // 因子
             analyseFactor();
@@ -468,6 +470,5 @@ public final class Analyser {
         if (negate) {
             instructions.add(new Instruction(Operation.SUB));
         }
-        // throw new Error("Not implemented");
     }
 }
