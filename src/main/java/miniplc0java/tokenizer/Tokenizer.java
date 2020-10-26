@@ -10,11 +10,11 @@ public class Tokenizer {
     private StringIter it;
     private HashMap<String, TokenType> keywordMap = new HashMap<>() {
         {
-            put("begin", TokenType.Begin);
-            put("end", TokenType.End);
-            put("var", TokenType.Var);
-            put("const", TokenType.Const);
-            put("print", TokenType.Print);
+            put("BEGIN", TokenType.Begin);
+            put("END", TokenType.End);
+            put("VAR", TokenType.Var);
+            put("CONST", TokenType.Const);
+            put("PRINT", TokenType.Print);
 //            put("+", TokenType.Plus);
 //            put("-", TokenType.Minus);
 //            put("*", TokenType.Mult);
@@ -76,11 +76,10 @@ public class Tokenizer {
         Pos end = it.currentPos();
         // 解析存储的字符串为无符号整数
         // 解析成功则返回无符号整数类型的token，否则返回编译错误
-        try {
+        try { // TODO 转换为无符号整数 ?　这玩意儿怎么可能转换失败 ?
             Token token = new Token(TokenType.Uint, Integer.parseInt(val), begin, end);
             return token;
         } catch (Exception e) {
-            System.out.println("error occur when tokenize");
             throw new TokenizeError(ErrorCode.InvalidInput, begin);
         }
         // Token 的 Value 应填写数字的值
@@ -100,9 +99,9 @@ public class Tokenizer {
             // -- 前进一个字符，并存储这个字符
         }
         Pos end = it.currentPos();
-        if (this.keywordMap.containsKey(val)) {
+        if (this.keywordMap.containsKey(val)) {  // 如果是关键字
             return new Token(keywordMap.get(val), val, begin, end);
-        } else {
+        } else {  // 是标识符
             return new Token(TokenType.Ident, val, begin, end);
         }
         // 尝试将存储的字符串解释为关键字
