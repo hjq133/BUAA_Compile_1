@@ -10,11 +10,11 @@ public class Tokenizer {
     private StringIter it;
     private HashMap<String, TokenType> keywordMap = new HashMap<>() {
         {
-            put("BEGIN", TokenType.Begin);
-            put("END", TokenType.End);
-            put("VAR", TokenType.Var);
-            put("CONST", TokenType.Const);
-            put("PRINT", TokenType.Print);
+            put("begin", TokenType.Begin);
+            put("end", TokenType.End);
+            put("var", TokenType.Var);
+            put("const", TokenType.Const);
+            put("print", TokenType.Print);
 //            put("+", TokenType.Plus);
 //            put("-", TokenType.Minus);
 //            put("*", TokenType.Mult);
