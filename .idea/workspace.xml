@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7ebd99a-57df-4789-b3f1-8079c45bf7f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java" afterDir="false" />
-    </list>
+    <list default="true" id="a7ebd99a-57df-4789-b3f1-8079c45bf7f3" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -27,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+            <state relative-caret-position="-1240">
+              <caret line="77" column="32" lean-forward="true" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -112,8 +110,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="337" />
-    <option name="y" value="85" />
+    <option name="x" value="53" />
+    <option name="y" value="350" />
     <option name="width" value="1509" />
     <option name="height" value="1093" />
   </component>
@@ -255,19 +253,18 @@
       <workItem from="1603632970186" duration="4287000" />
       <workItem from="1603672770293" duration="6285000" />
       <workItem from="1603679722121" duration="686000" />
-      <workItem from="1603721152199" duration="4267000" />
+      <workItem from="1603721152199" duration="5057000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27736000" />
+    <option name="totallyTimeSpent" value="28526000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="337" y="85" width="1509" height="1093" extended-state="0" />
-    <editor active="true" />
+    <frame x="53" y="350" width="1509" height="1093" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23071578" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49888393" visible="true" weight="0.23071578" />
+      <window_info id="Structure" order="1" sideWeight="0.5011161" side_tool="true" weight="0.23071578" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
@@ -365,8 +362,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/tokenizer/Tokenizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        <state relative-caret-position="-1240">
+          <caret line="77" column="32" lean-forward="true" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
         </state>
       </provider>
     </entry>
