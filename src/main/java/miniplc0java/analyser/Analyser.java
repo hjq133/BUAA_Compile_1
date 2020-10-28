@@ -471,7 +471,8 @@ public final class Analyser {
             int value = (int)token.getValue();
             instructions.add(new Instruction(Operation.LIT, value));
         } else if (check(TokenType.LParen)) {
-            // 是表达式
+            // 是表达
+            expect(TokenType.LParen);
             analyseExpression();
             // 调用相应的处理函数
             expect(TokenType.RParen);
