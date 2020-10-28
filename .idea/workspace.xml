@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7ebd99a-57df-4789-b3f1-8079c45bf7f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" afterDir="false" />
-    </list>
+    <list default="true" id="a7ebd99a-57df-4789-b3f1-8079c45bf7f3" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -38,8 +34,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="307" column="22" lean-forward="true" selection-start-line="307" selection-start-column="22" selection-end-line="307" selection-end-column="22" />
+            <state relative-caret-position="132">
+              <caret line="299" column="27" lean-forward="true" selection-start-line="299" selection-start-column="27" selection-end-line="299" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -113,9 +109,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="500" />
-    <option name="y" value="78" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="149" />
+    <option name="y" value="145" />
     <option name="width" value="1669" />
     <option name="height" value="1053" />
   </component>
@@ -224,15 +220,15 @@
       <workItem from="1603679722121" duration="686000" />
       <workItem from="1603721152199" duration="5057000" />
       <workItem from="1603863763709" duration="96000" />
-      <workItem from="1603864290636" duration="4574000" />
+      <workItem from="1603864290636" duration="4874000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33196000" />
+    <option name="totallyTimeSpent" value="33496000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="500" y="78" width="1669" height="1053" extended-state="0" />
+    <frame x="149" y="145" width="1669" height="1053" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49888393" visible="true" weight="0.21763602" />
@@ -334,8 +330,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="307" column="22" lean-forward="true" selection-start-line="307" selection-start-column="22" selection-end-line="307" selection-end-column="22" />
+        <state relative-caret-position="132">
+          <caret line="299" column="27" lean-forward="true" selection-start-line="299" selection-start-column="27" selection-end-line="299" selection-end-column="27" />
         </state>
       </provider>
     </entry>
