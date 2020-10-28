@@ -219,13 +219,13 @@ public final class Analyser {
     // <常量声明> ::= {<常量声明语句>}
     // <常量声明语句> ::= 'const'<标识符>'='<常表达式>';'
     private void analyseConstantDeclaration() throws CompileError {
-        // System.out.println("analyseConstantDeclaration");
+        System.out.println("analyseConstantDeclaration");
         // 示例函数，示例如何解析常量声明
         // 常量声明 -> 常量声明语句*
 
         // 如果下一个 token 是 const 就继续
         while (nextIf(TokenType.Const) != null) {
-            // System.out.println("常量声明语句");
+            System.out.println("常量声明语句");
             // 常量声明语句 -> 'const' 变量名 '=' 常表达式 ';'
 
             // 变量名
@@ -255,7 +255,7 @@ public final class Analyser {
     // <变量声明语句> ::= 'var'<标识符>['='<表达式>]';'
     private void analyseVariableDeclaration() throws CompileError {
         // 变量声明 -> 变量声明语句*
-        // System.out.println("analyseVariableDeclaration");
+        System.out.println("analyseVariableDeclaration");
         // 如果下一个 token 是 var 就继续
         while (nextIf(TokenType.Var) != null) {
             // 变量声明语句 -> 'var' 变量名 ('=' 表达式)? ';'
@@ -290,6 +290,7 @@ public final class Analyser {
     //<语句序列> ::= {<语句>}
     private void analyseStatementSequence() throws CompileError {
         // 语句序列 -> 语句*
+        System.out.println("analyseStatementSequence");
         // 语句 -> 赋值语句 | 输出语句 | 空语句
 
         while (true) {
@@ -302,11 +303,12 @@ public final class Analyser {
             } else if (peeked.getTokenType() == TokenType.Print) { // 如果是pirnt
                 analyseOutputStatement();
             } else if (peeked.getTokenType() == TokenType.Semicolon) {
-                // 空语句
+                expect(TokenType.Semicolon);
             } else {
                 break;
             }
         }
+        System.out.println("analyseStatementSequence End");
     }
 
     // <常表达式> ::= [<符号>]<无符号整数>
@@ -333,7 +335,7 @@ public final class Analyser {
     private void analyseExpression() throws CompileError {
         // 表达式 -> 项 (加法运算符 项)*
         // 项
-        // System.out.println("analyseExpression");
+        System.out.println("analyseExpression");
         analyseItem();
 
         while (true) {
@@ -356,11 +358,13 @@ public final class Analyser {
                 instructions.add(new Instruction(Operation.SUB));
             }
         }
+        System.out.println("analyseExpression End");
     }
 
     // <赋值语句> ::= <标识符>'='<表达式>';'
     private void analyseAssignmentStatement() throws CompileError {
         // 赋值语句 -> 标识符 '=' 表达式 ';'
+        System.out.println("analyseAssignmentStatement");
         var nameToken = expect(TokenType.Ident);
         expect(TokenType.Equal);
         // 分析这个语句
@@ -381,12 +385,13 @@ public final class Analyser {
         // 把结果保存
         var offset = getOffset(name, nameToken.getStartPos());
         instructions.add(new Instruction(Operation.STO, offset));
+        System.out.println("analyseAssignmentStatement End");
     }
 
     // TODO
     private void analyseOutputStatement() throws CompileError {
         // 输出语句 -> 'print' '(' 表达式 ')' ';'
-
+        System.out.println("analyseOutputStatement");
         expect(TokenType.Print);
         expect(TokenType.LParen);
 
@@ -401,7 +406,7 @@ public final class Analyser {
     //<项> ::= <因子>{<乘法型运算符><因子>}
     private void analyseItem() throws CompileError {
         // 项 -> 因子 (乘法运算符 因子)*
-        // System.out.println("analyseItem");
+        System.out.println("analyseItem");
         // 因子
         analyseFactor();
         while (true) {
@@ -424,12 +429,13 @@ public final class Analyser {
                 instructions.add(new Instruction(Operation.DIV));
             }
         }
+        System.out.println("analyseItem End");
     }
 
     // nextIf: 偷看下一个 token，如果 token 的类型与 tt 相同则前进一个 token 并返回它
     private void analyseFactor() throws CompileError {
         // 因子 -> 符号? (标识符 | 无符号整数 | '(' 表达式 ')')
-        // System.out.println("analyseFactor");
+        System.out.println("analyseFactor");
         boolean negate;
         if (nextIf(TokenType.Minus) != null) {
             negate = true;
@@ -455,6 +461,7 @@ public final class Analyser {
                 throw new AnalyzeError(ErrorCode.NotInitialized, /* 当前位置 */ nameToken.getStartPos());
             }
             var offset = getOffset(name, nameToken.getStartPos());
+            System.out.println("LODLODLOD");
             instructions.add(new Instruction(Operation.LOD, offset));
         } else if (check(TokenType.Uint)) {
             // 是整数
@@ -468,6 +475,7 @@ public final class Analyser {
             analyseExpression();
             // 调用相应的处理函数
             expect(TokenType.RParen);
+            System.out.println("RParen");
         } else {
             // 都不是，摸了
             throw new ExpectedTokenError(List.of(TokenType.Ident, TokenType.Uint, TokenType.LParen), next());
@@ -476,5 +484,6 @@ public final class Analyser {
         if (negate) {
             instructions.add(new Instruction(Operation.SUB));
         }
+        System.out.println("analyseFactor End");
     }
 }

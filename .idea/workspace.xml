@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ebd99a-57df-4789-b3f1-8079c45bf7f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java" afterDir="false" />
     </list>
@@ -37,8 +38,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="257" column="11" selection-start-line="257" selection-start-column="11" selection-end-line="257" selection-end-column="11" />
+            <state relative-caret-position="517">
+              <caret line="307" column="22" lean-forward="true" selection-start-line="307" selection-start-column="22" selection-end-line="307" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -56,10 +57,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>var</find>
-      <find>peek()</find>
-      <find>nameToken.getValue();</find>
-      <find>Error</find>
       <find>throw new</find>
       <find>pos</find>
       <find>String name</find>
@@ -74,18 +71,22 @@
       <find>SymbolEntry</find>
       <find>Instruction</find>
       <find>赋值语句</find>
-      <find>analyseAssignmentStatement</find>
       <find>预读可能是运算符的</find>
       <find>expect(TokenType.Ident)</find>
       <find>getOffset</find>
       <find>curPos</find>
       <find>AnalyzeError</find>
-      <find>analyseVariableDeclaration</find>
-      <find>analyseExpression</find>
-      <find>analyseItem</find>
-      <find>analyseFactor</find>
       <find>Uint</find>
       <find>expect(TokenType.Uint);</find>
+      <find>LOD</find>
+      <find>analyseVariableDeclaration</find>
+      <find>analyseStatementSequence</find>
+      <find>analyseOutputStatement</find>
+      <find>Ass</find>
+      <find>analyseAssignmentStatement</find>
+      <find>analyseItem</find>
+      <find>analyseFactor</find>
+      <find>analyseExpression</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/java/miniplc0java</dir>
@@ -113,8 +114,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="182" />
-    <option name="y" value="607" />
+    <option name="x" value="500" />
+    <option name="y" value="78" />
     <option name="width" value="1669" />
     <option name="height" value="1053" />
   </component>
@@ -223,15 +224,15 @@
       <workItem from="1603679722121" duration="686000" />
       <workItem from="1603721152199" duration="5057000" />
       <workItem from="1603863763709" duration="96000" />
-      <workItem from="1603864290636" duration="2582000" />
+      <workItem from="1603864290636" duration="4574000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31204000" />
+    <option name="totallyTimeSpent" value="33196000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-152" y="195" width="1669" height="1053" extended-state="0" />
+    <frame x="500" y="78" width="1669" height="1053" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49888393" visible="true" weight="0.21763602" />
@@ -333,8 +334,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/miniplc0java/analyser/Analyser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="257" column="11" selection-start-line="257" selection-start-column="11" selection-end-line="257" selection-end-column="11" />
+        <state relative-caret-position="517">
+          <caret line="307" column="22" lean-forward="true" selection-start-line="307" selection-start-column="22" selection-end-line="307" selection-end-column="22" />
         </state>
       </provider>
     </entry>

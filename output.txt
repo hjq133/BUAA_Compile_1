@@ -1,3 +1,4 @@
 LIT 1
+LIT 2
 LOD 0
-WRT
+STO 1
