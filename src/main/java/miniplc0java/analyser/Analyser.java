@@ -219,11 +219,13 @@ public final class Analyser {
     // <常量声明> ::= {<常量声明语句>}
     // <常量声明语句> ::= 'const'<标识符>'='<常表达式>';'
     private void analyseConstantDeclaration() throws CompileError {
+        // System.out.println("analyseConstantDeclaration");
         // 示例函数，示例如何解析常量声明
         // 常量声明 -> 常量声明语句*
 
         // 如果下一个 token 是 const 就继续
         while (nextIf(TokenType.Const) != null) {
+            // System.out.println("常量声明语句");
             // 常量声明语句 -> 'const' 变量名 '=' 常表达式 ';'
 
             // 变量名
@@ -253,13 +255,14 @@ public final class Analyser {
     // <变量声明语句> ::= 'var'<标识符>['='<表达式>]';'
     private void analyseVariableDeclaration() throws CompileError {
         // 变量声明 -> 变量声明语句*
-
+        // System.out.println("analyseVariableDeclaration");
         // 如果下一个 token 是 var 就继续
         while (nextIf(TokenType.Var) != null) {
             // 变量声明语句 -> 'var' 变量名 ('=' 表达式)? ';'
 
             // 变量名
             var nameToken = expect(TokenType.Ident);
+            // System.out.println(nameToken.getValue());
             // 变量初始化了吗
             boolean initialized = false;
 
@@ -330,6 +333,7 @@ public final class Analyser {
     private void analyseExpression() throws CompileError {
         // 表达式 -> 项 (加法运算符 项)*
         // 项
+        // System.out.println("analyseExpression");
         analyseItem();
 
         while (true) {
@@ -397,7 +401,7 @@ public final class Analyser {
     //<项> ::= <因子>{<乘法型运算符><因子>}
     private void analyseItem() throws CompileError {
         // 项 -> 因子 (乘法运算符 因子)*
-
+        // System.out.println("analyseItem");
         // 因子
         analyseFactor();
         while (true) {
@@ -425,7 +429,7 @@ public final class Analyser {
     // nextIf: 偷看下一个 token，如果 token 的类型与 tt 相同则前进一个 token 并返回它
     private void analyseFactor() throws CompileError {
         // 因子 -> 符号? (标识符 | 无符号整数 | '(' 表达式 ')')
-
+        // System.out.println("analyseFactor");
         boolean negate;
         if (nextIf(TokenType.Minus) != null) {
             negate = true;
@@ -455,7 +459,9 @@ public final class Analyser {
         } else if (check(TokenType.Uint)) {
             // 是整数
             // 加载整数值
-            int value = 0;
+            // System.out.println("无符号整数");
+            var token = expect(TokenType.Uint);
+            int value = (int)token.getValue();
             instructions.add(new Instruction(Operation.LIT, value));
         } else if (check(TokenType.LParen)) {
             // 是表达式
