@@ -54,6 +54,9 @@ public enum TokenType {
     Colon,
     Semicolon,
 
+    /** type */
+    Ty,
+
     /** 文件尾 */
     EOF;
 
@@ -82,6 +85,8 @@ public enum TokenType {
                 return "UnsignedInteger";
             case String:
                 return "String";
+            case Ty:
+                return "ty";
 
             /* 运算符 */
             case LParen:
@@ -122,7 +127,6 @@ public enum TokenType {
                 return "lbrace";
             case RBrace:
                 return "rbrace";
-
             case EOF:
                 return "EOF";
             default:

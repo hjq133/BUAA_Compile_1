@@ -194,98 +194,126 @@ public final class Analyser {
     }
 
     /**
-     * <程序> ::= 'begin'<主过程>'end'
+     * program -> decl_stmt* function*
      */
     private void analyseProgram() throws CompileError {
-        // 程序 -> 'begin' 主过程 'end'
-        // 示例函数，示例如何调用子程序
-        // 'begin'
-        expect(TokenType.Begin);
-
-        analyseMain();
-
-        // 'end'
-        expect(TokenType.End);
+        while(true) {
+            if(check(TokenType.LET_KW) || check(TokenType.CONST_KW)){
+                analyseDeclareStatement();
+            }
+        }
+        while(true) {
+            if(check(TokenType.FN_KW)) {
+                analyseFunction();
+            }
+        }
         expect(TokenType.EOF);
     }
 
-    private void analyseMain() throws CompileError {
-        // 主过程 -> 常量声明 变量声明 语句序列
-        analyseConstantDeclaration();
-        analyseVariableDeclaration();
-        analyseStatementSequence();
-    }
-
-    // <常量声明> ::= {<常量声明语句>}
-    // <常量声明语句> ::= 'const'<标识符>'='<常表达式>';'
-    private void analyseConstantDeclaration() throws CompileError {
-        System.out.println("analyseConstantDeclaration");
-        // 示例函数，示例如何解析常量声明
-        // 常量声明 -> 常量声明语句*
-
-        // 如果下一个 token 是 const 就继续
-        while (nextIf(TokenType.Const) != null) {
-            System.out.println("常量声明语句");
-            // 常量声明语句 -> 'const' 变量名 '=' 常表达式 ';'
-
-            // 变量名
-            var nameToken = expect(TokenType.Ident);
-
-            // 加入符号表
-            String name = (String) nameToken.getValue();
-            addSymbol(name, true, true, nameToken.getStartPos());
-
-            // 等于号
-            expect(TokenType.Equal);
-
-            // 常表达式
-            var value = analyseConstantExpression();
-
-            // 分号
-            expect(TokenType.Semicolon);
-
-            // 这里把常量值直接放进栈里，位置和符号表记录的一样。
-            // 更高级的程序还可以把常量的值记录下来，遇到相应的变量直接替换成这个常数值，
-            // 我们这里就先不这么干了。
-            instructions.add(new Instruction(Operation.LIT, value));
+    /**
+     * decl_stmt -> let_decl_stmt | const_decl_stmt
+     */
+    private void analyseDeclareStatement() throws CompileError {
+        if(check(TokenType.LET_KW)){
+            analyseLetDeclare();
+        }
+        else {
+            analyseConstDeclare();
         }
     }
 
-    // <变量声明> ::= {<变量声明语句>}
-    // <变量声明语句> ::= 'var'<标识符>['='<表达式>]';'
-    private void analyseVariableDeclaration() throws CompileError {
-        // 变量声明 -> 变量声明语句*
-        System.out.println("analyseVariableDeclaration");
-        // 如果下一个 token 是 var 就继续
-        while (nextIf(TokenType.Var) != null) {
-            // 变量声明语句 -> 'var' 变量名 ('=' 表达式)? ';'
+    /**
+     * let_decl_stmt -> 'let' IDENT ':' ty ('=' expr)? ';'
+     * @throws CompileError
+     */
+    private void analyseLetDeclare() throws CompileError {
+        expect(TokenType.LET_KW);
 
-            // 变量名
-            var nameToken = expect(TokenType.Ident);
-            // System.out.println(nameToken.getValue());
-            // 变量初始化了吗
-            boolean initialized = false;
+        System.out.println("analyse let declare");
+        var nameToken = expect(TokenType.Ident);
 
-            // 下个 token 是等于号吗？如果是的话分析初始化
-            if (nextIf(TokenType.Equal) != null) {
-                // 分析初始化的表达式
-                initialized = true;
-                analyseExpression();
-            }
+        // : 冒号
+        expect(TokenType.Colon);
+        var type = expect(TokenType.Ty);
 
-            // 分号
-            expect(TokenType.Semicolon);
+        // 变量初始化了吗
+        boolean initialized = false;
 
-            // 加入符号表，请填写名字和当前位置（报错用）
-            String name = (String) nameToken.getValue();
-            addSymbol(name, initialized, false, nameToken.getStartPos());
-
-            // 如果没有初始化的话在栈里推入一个初始值
-            if (!initialized) {
-                instructions.add(new Instruction(Operation.LIT, 0));
-            } // TODO 如果有初始化的话怎么办, analysisExpression会自动压栈?
+        // 下个 token 是等于号吗？如果是的话分析初始化
+        if (nextIf(TokenType.Eq) != null) {
+            // 分析初始化的表达式
+            initialized = true;
+            analyseExpression();
         }
+
+        // 分号
+        expect(TokenType.Semicolon);
+
+        // 加入符号表，请填写名字和当前位置（报错用）
+        String name = (String) nameToken.getValue();
+        addSymbol(name, initialized, false, nameToken.getStartPos());
+
+        // 如果没有初始化的话在栈里推入一个初始值
+        if (!initialized) {
+            instructions.add(new Instruction(Operation.LIT, 0));
+        } // TODO 如果有初始化的话怎么办, analysisExpression会自动压栈? 会
     }
+
+    /**
+     * const_decl_stmt -> 'const' IDENT ':' ty '=' expr ';'
+     */
+    private void analyseConstDeclare() throws CompileError {
+        expect(TokenType.CONST_KW);
+
+        System.out.println("analyse Constant declare");
+
+        // 变量名
+        var nameToken = expect(TokenType.Ident);
+
+        // 加入符号表
+        String name = (String) nameToken.getValue();
+        addSymbol(name, true, true, nameToken.getStartPos());
+
+        // : 冒号
+        expect(TokenType.Colon);
+        var type = expect(TokenType.Ty);
+
+        // = 等号
+        expect(TokenType.Eq);
+
+        // 常表达式
+        var value = analyseExpression();
+
+        // 分号
+        expect(TokenType.Semicolon);
+
+        // 这里把常量值直接放进栈里，位置和符号表记录的一样。
+        // 更高级的程序还可以把常量的值记录下来，遇到相应的变量直接替换成这个常数值，
+        // 我们这里就先不这么干了。
+        instructions.add(new Instruction(Operation.LIT, value));
+    }
+
+    private void analyseFunction() throws CompileError {
+        expect(TokenType.FN_KW);
+
+        System.out.println("analyse Function declare");
+
+        // 变量名
+        var nameToken = expect(TokenType.Ident);
+
+        // 加入符号表
+        String name = (String) nameToken.getValue();
+        addSymbol(name, true, true, nameToken.getStartPos());
+
+
+    }
+
+
+
+
+
+
+
 
     //<语句序列> ::= {<语句>}
     private void analyseStatementSequence() throws CompileError {

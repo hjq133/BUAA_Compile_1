@@ -23,6 +23,9 @@ public class Tokenizer {
             put("if", TokenType.IF_KW);
             put("else", TokenType.ELSE_KW);
             put("return", TokenType.RETURN_KW);
+
+            /* type */
+            put("ty", TokenType.Ty);
         }
     };
 
