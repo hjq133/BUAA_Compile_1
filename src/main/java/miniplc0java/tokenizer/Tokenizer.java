@@ -10,24 +10,19 @@ public class Tokenizer {
     private StringIter it;
     private HashMap<String, TokenType> keywordMap = new HashMap<>() {
         {
-//            put("BEGIN", TokenType.Begin);
-//            put("END", TokenType.End);
-//            put("VAR", TokenType.Var);
-//            put("CONST", TokenType.Const);
-//            put("PRINT", TokenType.Print);
-            put("begin", TokenType.Begin);
-            put("end", TokenType.End);
-            put("var", TokenType.Var);
-            put("const", TokenType.Const);
-            put("print", TokenType.Print);
-//            put("+", TokenType.Plus);
-//            put("-", TokenType.Minus);
-//            put("*", TokenType.Mult);
-//            put("/", TokenType.Div);
-//            put("=", TokenType.Equal);
-//            put(";", TokenType.Semicolon);
-//            put("(", TokenType.LParen);
-//            put(")", TokenType.RParen);
+//            put("begin", TokenType.Begin);
+//            put("end", TokenType.End);
+//            put("var", TokenType.Var);
+//            put("const", TokenType.Const);
+//            put("print", TokenType.Print);
+            put("fn", TokenType.FN_KW);
+            put("let", TokenType.LET_KW);
+            put("const", TokenType.CONST_KW);
+            put("as", TokenType.AS_KW);
+            put("while", TokenType.WHILE_KW);
+            put("if", TokenType.IF_KW);
+            put("else", TokenType.ELSE_KW);
+            put("return", TokenType.RETURN_KW);
         }
     };
 

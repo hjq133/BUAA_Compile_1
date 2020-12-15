@@ -1,22 +1,29 @@
 package miniplc0java.tokenizer;
 
+/*
+    FN_KW,
+    LET_KW,
+    CONST_KW,
+    AS_KW,
+    WHILE_KW,
+    IF_KW,
+    ELSE_KW,
+    RETURN_KW,
+*/
 public enum TokenType {
-    /** 空 */
-    None,
-    /** 无符号整数 */
-    Uint,
-    /** 标识符 */
+    /** 关键字 */
+    FN_KW,
+    LET_KW,
+    CONST_KW,
+    AS_KW,
+    WHILE_KW,
+    IF_KW,
+    ELSE_KW,
+    RETURN_KW,
     Ident,
-    /** Begin */
-    Begin,
-    /** End */
-    End,
-    /** Var */
-    Var,
-    /** Const */
-    Const,
-    /** Print */
-    Print,
+    Uint,
+
+    /** 运算符 */
     /** 加号 */
     Plus,
     /** 减号 */
@@ -25,54 +32,96 @@ public enum TokenType {
     Mult,
     /** 除号 */
     Div,
-    /** 等号 */
-    Equal,
-    /** 分号 */
-    Semicolon,
     /** 左括号 */
     LParen,
     /** 右括号 */
     RParen,
+    /** 左大括号 */
+    LBrace,
+    /** 右大括号 */
+    RBrace,
+
+    Assign, // =
+    Eq, // ==
+    Neq, // !=
+    Lt,
+    Gt,
+    Le,
+    Ge,
+    Arrow,
+    Comma,
+    Colon,
+    Semicolon,
+
     /** 文件尾 */
     EOF;
 
     @Override
     public String toString() {
         switch (this) {
-            case None:
-                return "NullToken";
-            case Begin:
-                return "Begin";
-            case Const:
-                return "Const";
-            case Div:
-                return "DivisionSign";
-            case EOF:
-                return "EOF";
-            case End:
-                return "End";
-            case Equal:
-                return "EqualSign";
+            case FN_KW:
+                return "FN_KW";
+            case LET_KW:
+                return "LET_KW";
+            case CONST_KW:
+                return "CONST_KW";
+            case AS_KW:
+                return "AS_KW";
+            case WHILE_KW:
+                return "WHILE_KW";
+            case IF_KW:
+                return "IF_KW";
+            case ELSE_KW:
+                return "ELSE_KW";
+            case RETURN_KW:
+                return "RETURN_KW";
             case Ident:
                 return "Identifier";
+            case Uint:
+                return "UnsignedInteger";
+
+            /* 运算符 */
             case LParen:
                 return "LeftBracket";
+            case RParen:
+                return "RightBracket";
             case Minus:
                 return "MinusSign";
             case Mult:
                 return "MultiplicationSign";
             case Plus:
                 return "PlusSign";
-            case Print:
-                return "Print";
-            case RParen:
-                return "RightBracket";
+            case Div:
+                return "DivisionSign";
             case Semicolon:
                 return "Semicolon";
-            case Uint:
-                return "UnsignedInteger";
-            case Var:
-                return "Var";
+            case Assign:
+                return "Assign";
+            case Eq:
+                return "eq";
+            case Ge:
+                return "ge";
+            case Gt:
+                return "gt";
+            case Le:
+                return "le";
+            case Lt:
+                return "lt";
+            case Neq:
+                return "neq";
+            case Arrow:
+                return "arrow";
+            case Colon:
+                return "colon"; // :
+            case Comma:
+                return "comma";
+            case LBrace:
+                return "lbrace";
+            case RBrace:
+                return "rbrace";
+
+            case EOF:
+                return "EOF";
             default:
                 return "InvalidToken";
         }
