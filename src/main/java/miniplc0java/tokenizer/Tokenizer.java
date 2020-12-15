@@ -85,6 +85,25 @@ public class Tokenizer {
         // Token 的 Value 应填写数字的值
     }
 
+    // Todo new 检查是否是string
+        private Token lexString() throws TokenizeError {
+        String val = "";
+        char peek = it.peekChar();
+        Pos begin = it.currentPos();
+        if (peek  != '"') {
+            throw new TokenizeError(ErrorCode.InvalidInput, begin);
+        }
+        it.nextChar();
+        peek = it.peekChar();
+        while(peek != '"') {
+            it.nextChar();
+            val = val + peek;
+            peek = it.peekChar();
+        }
+        Pos end = it.currentPos();
+        return new Token(TokenType.String, val, begin, end);
+    }
+
     // TODO done!
     private Token lexIdentOrKeyword() throws TokenizeError {
         // 请填空：
@@ -112,23 +131,70 @@ public class Tokenizer {
     }
 
     private Token lexOperatorOrUnknown() throws TokenizeError {
+        Pos begin, end;
+        char peek;
         switch (it.nextChar()) {
             case '+':
                 return new Token(TokenType.Plus, '+', it.previousPos(), it.currentPos());
             case '-':
+                begin = it.previousPos();
+                peek = it.peekChar();
+                if(peek == '>') {
+                    it.nextChar();
+                    return new Token(TokenType.Arrow, "->", begin, it.currentPos());
+                }
                 return new Token(TokenType.Minus, '-', it.previousPos(), it.currentPos());
             case '*':
                 return new Token(TokenType.Mult, '*', it.previousPos(), it.currentPos());
             case '/':
                 return new Token(TokenType.Div, '/', it.previousPos(), it.currentPos());
             case '=':
-                return new Token(TokenType.Equal, '=', it.previousPos(), it.currentPos());
+                begin = it.previousPos();
+                peek = it.peekChar();
+                if(peek == '=') {
+                    it.nextChar();
+                    return new Token(TokenType.Eq, "==", begin, it.currentPos());
+                }
+                return new Token(TokenType.Assign, '=', it.previousPos(), it.currentPos());
+            case '!':
+                begin = it.previousPos();
+                peek = it.peekChar();
+                if(peek == '=') {
+                    it.nextChar();
+                    return new Token(TokenType.Eq, "!=", begin, it.currentPos());
+                } else {
+                    throw new TokenizeError(ErrorCode.InvalidInput, begin);
+                }
             case ';':
                 return new Token(TokenType.Semicolon, ';', it.previousPos(), it.currentPos());
+            case ':':
+                return new Token(TokenType.Colon, ':', it.previousPos(), it.currentPos());
+            case ',':
+                return new Token(TokenType.Comma, ',', it.previousPos(), it.currentPos());
             case '(':
                 return new Token(TokenType.LParen, '(', it.previousPos(), it.currentPos());
             case ')':
                 return new Token(TokenType.RParen, ')', it.previousPos(), it.currentPos());
+            case '{':
+                return new Token(TokenType.LBrace, '{', it.previousPos(), it.currentPos());
+            case '}':
+                return new Token(TokenType.RBrace, '}', it.previousPos(), it.currentPos());
+            case '<':
+                begin = it.previousPos();
+                peek = it.peekChar();
+                if(peek == '=') {
+                    it.nextChar();
+                    return new Token(TokenType.Le, "<=", begin, it.currentPos());
+                }
+                return new Token(TokenType.Lt, '<', it.previousPos(), it.currentPos());
+            case '>':
+                begin = it.previousPos();
+                peek = it.peekChar();
+                if(peek == '=') {
+                    it.nextChar();
+                    return new Token(TokenType.Ge, ">=", begin, it.currentPos());
+                }
+                return new Token(TokenType.Gt, '>', it.previousPos(), it.currentPos());
             default:
                 // 不认识这个输入，摸了
                 throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());

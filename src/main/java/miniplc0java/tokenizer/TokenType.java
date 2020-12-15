@@ -22,6 +22,7 @@ public enum TokenType {
     RETURN_KW,
     Ident,
     Uint,
+    String,
 
     /** 运算符 */
     /** 加号 */
@@ -79,6 +80,8 @@ public enum TokenType {
                 return "Identifier";
             case Uint:
                 return "UnsignedInteger";
+            case String:
+                return "String";
 
             /* 运算符 */
             case LParen:
