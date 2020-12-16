@@ -200,11 +200,15 @@ public final class Analyser {
         while(true) {
             if(check(TokenType.LET_KW) || check(TokenType.CONST_KW)){
                 analyseDeclareStatement();
+            } else {
+                break;
             }
         }
         while(true) {
             if(check(TokenType.FN_KW)) {
                 analyseFunction();
+            } else {
+                break;
             }
         }
         expect(TokenType.EOF);
@@ -293,25 +297,88 @@ public final class Analyser {
         instructions.add(new Instruction(Operation.LIT, value));
     }
 
+
+    /** 
+     * function -> 'fn' IDENT '(' function_param_list? ')' '->' ty block_stmt 
+     * TODO 如何把返回值类型利用？
+     */
     private void analyseFunction() throws CompileError {
         expect(TokenType.FN_KW);
 
         System.out.println("analyse Function declare");
 
-        // 变量名
+        // 函数名
         var nameToken = expect(TokenType.Ident);
 
-        // 加入符号表
+        // 函数名加入符号表
         String name = (String) nameToken.getValue();
         addSymbol(name, true, true, nameToken.getStartPos());
 
+        expect(TokenType.LParen);
+        analyseFunctionParamList();
+        expect(TokenType.RParen);
+        expect(TokenType.Arrow);
+
+        var type = expect(TokenType.Ty);  // 返回值类型
+        analyseBlockStatement();
+    }
+
+    /** 
+     * function_param_list -> function_param (',' function_param)*
+     * TODO 参数值如何放到符号表里？
+     */
+    private void analyseFunctionParamList() throws CompileError {
+        analyseFunctionParam();
+        while(nextIf(TokenType.Comma) != null) {
+            analyseFunctionParam();
+        }
+    }
+
+    /** 
+     * function_param -> 'const'? IDENT ':' ty
+     * TODO 参数值如何放到符号表里？
+     */
+    private void analyseFunctionParam() throws CompileError {
+        expect(TokenType.CONST_KW);
+        
+        // 变量名
+        var nameToken = expect(TokenType.Ident);
+        expect(TokenType.Colon);
+        
+        // 类型
+        var type = expect(TokenType.Ty);
+        
+        // 加入符号表
+        String name = (String) nameToken.getValue();
+        addSymbol(name, true, true, nameToken.getStartPos());
+    }
+
+    /** 
+     * block_stmt -> '{' stmt* '}'
+     * TODO 如何解决这个0和多次的问题？？
+     */
+    private void analyseBlockStatement() throws CompileError {
+        expect(TokenType.LBrace);
+        while
+    }
+
+    /**
+        stmt ->
+            expr_stmt
+            | decl_stmt
+            | if_stmt
+            | while_stmt
+            | return_stmt
+            | block_stmt
+            | empty_stmt
+     */
+    private void analyseStatement() throws CompileError {
 
     }
 
-
-
-
-
+    private void analyseExpression() throws CompileError {
+        
+    }
 
 
 
