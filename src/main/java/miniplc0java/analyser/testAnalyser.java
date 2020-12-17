@@ -48,6 +48,21 @@ public final class testAnalyser {
         }
     };
 
+    HashMap<String, Operation> String2OP = new HashMap<>(){
+        {
+            String2OP.put("*", Operation.MUL);
+            String2OP.put("/", Operation.DIV);
+            String2OP.put("+", Operation.ADD);
+            String2OP.put("-", Operation.SUB);
+            String2OP.put(">", Operation.GT);
+            String2OP.put("<", Operation.LT);
+            String2OP.put(">=", Operation.LE);
+            String2OP.put("<=", Operation.GE);
+            String2OP.put("==", Operation.EQ);
+            String2OP.put("!=", Operation.NEQ);
+        }
+    };
+    
     /**
      * 下一个变量的栈偏移
      */
@@ -149,11 +164,11 @@ public final class testAnalyser {
      * @param curPos        当前 token 的位置（报错用）
      * @throws AnalyzeError 如果重复定义了则抛异常
      */
-    private void addSymbol(String name, boolean isInitialized, boolean isConstant, Pos curPos) throws AnalyzeError {
+    private void addSymbol(String name, boolean isInitialized, boolean isConstant, Pos curPos, int type) throws AnalyzeError {
         if (this.symbolTable.get(name) != null) {
             throw new AnalyzeError(ErrorCode.DuplicateDeclaration, curPos);
         } else {
-            this.symbolTable.put(name, new SymbolEntry(isConstant, isInitialized, getNextVariableOffset()));
+            this.symbolTable.put(name, new SymbolEntry(isConstant, isInitialized, getNextVariableOffset(), type));
         }
     }
 
@@ -196,8 +211,8 @@ public final class testAnalyser {
             String name = (String) nameToken.getValue();
             if(nextIf(TokenType.Eq) != null) {  // assign_expr -> IDENT '=' expr
                 analyseExpression(1);
-                var offset = getOffset(name, nameToken.getStartPos());
-                instructions.add(new Instruction(Operation.STO, offset));
+                // var offset = getOffset(name, nameToken.getStartPos());
+                instructions.add(new Instruction(Operation.STO, 0));
             } else if(nextIf(TokenType.LParen) != null) {  // call_expr -> IDENT '(' call_param_list? ')'
                 if(check(TokenType.RParen)) {
                     expect(TokenType.RParen);
@@ -206,9 +221,9 @@ public final class testAnalyser {
                     System.out.println("TODO analyse call param list");
                 }
             } else {  // IDENT TODO 查符号表看有没有, 然后压入栈
-                var offset = getOffset(name, nameToken.getStartPos());
+                // var offset = getOffset(name, nameToken.getStartPos());
                 System.out.println("LOD");
-                instructions.add(new Instruction(Operation.LOD, offset));
+                instructions.add(new Instruction(Operation.LOD, 0));
             }
         } else if(check(TokenType.Minus)) {  // negate_expr -> '-' expr
             expect(TokenType.Minus);
@@ -241,17 +256,18 @@ public final class testAnalyser {
         if(check(TokenType.AS_KW)) { // as_expr -> expr 'as' ty
             expect(TokenType.AS_KW);
             var type = expect(TokenType.Ty);
-            // TODO
+            // TODO 附加的先不管
         } else { // operator_expr -> expr binary_operator expr
             var token = next();
-            if (OPPrec.get(token.getValue()) == null || OPPrec.get(token.getValue()) < min_prec) {
+            String name = (String)token.getValue();
+            if (OPPrec.get(name) == null || OPPrec.get(name) < minPrec) {
                 return;
             }
             String op = (String)token.getValue();
             int prec = OPPrec.get(op);
-            int next_min_prec = prec + 1;
-            analyseExpression(next_min_prec);
-            System.out.println(op);
+            int nextMinPrec = prec + 1;
+            analyseExpression(nextMinPrec);
+            instructions.add(new Instruction())
         }
     }
 

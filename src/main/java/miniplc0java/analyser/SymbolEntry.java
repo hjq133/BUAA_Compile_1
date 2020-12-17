@@ -4,16 +4,13 @@ public class SymbolEntry {
     boolean isConstant;
     boolean isInitialized;
     int stackOffset;
+    int type;  // 0表示int，1表示char，2表示string
 
-    /**
-     * @param isConstant
-     * @param isDeclared
-     * @param stackOffset
-     */
-    public SymbolEntry(boolean isConstant, boolean isDeclared, int stackOffset) {
+    public SymbolEntry(boolean isConstant, boolean isDeclared, int stackOffset, int type) {
         this.isConstant = isConstant;
         this.isInitialized = isDeclared;
         this.stackOffset = stackOffset;
+        this.type = type;
     }
 
     /**
