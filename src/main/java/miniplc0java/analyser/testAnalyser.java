@@ -208,7 +208,7 @@ public final class testAnalyser {
         if(check(TokenType.Ident)) {
             var nameToken = expect(TokenType.Ident);
             String name = (String) nameToken.getValue();
-            if(nextIf(TokenType.Eq) != null) {  // assign_expr -> IDENT '=' expr
+            if(nextIf(TokenType.Assign) != null) {  // assign_expr -> IDENT '=' expr
                 analyseExpression(1);
                 // var offset = getOffset(name, nameToken.getStartPos());
                 instructions.add(new Instruction(Operation.STO, 0));
@@ -241,11 +241,11 @@ public final class testAnalyser {
                 instructions.add(new Instruction(Operation.LIT, value));
             } else if(check(TokenType.String)) {
                 var token = expect(TokenType.String);
-                String value = (String)token.getValue();
+                String value = token.getValue().toString();
                 instructions.add(new Instruction(Operation.LIT, value));
             } else if(check(TokenType.Char)) {
                 var token = expect(TokenType.Char);
-                String value = (String)token.getValue();
+                String value = token.getValue().toString();
                 instructions.add(new Instruction(Operation.LIT, value));  // TODO char 的操作数
             } else {
                 throw new ExpectedTokenError(List.of(TokenType.Ident, TokenType.Uint, TokenType.LParen), next());
@@ -257,16 +257,19 @@ public final class testAnalyser {
             var type = expect(TokenType.Ty);
             // TODO 附加的先不管
         } else { // operator_expr -> expr binary_operator expr
-            var token = next();
-            String name = (String)token.getValue();
-            if (OPPrec.get(name) == null || OPPrec.get(name) < minPrec) {
-                return;
+            while(true) {
+                var token = peek();
+                String name = token.getValue().toString();
+                if (OPPrec.get(name) == null || OPPrec.get(name) < minPrec) {
+                    return;
+                }
+                next();
+                String op = token.getValue().toString();
+                int prec = OPPrec.get(op);
+                int nextMinPrec = prec + 1;
+                analyseExpression(nextMinPrec);
+                instructions.add(new Instruction(String2OP.get(op)));
             }
-            String op = (String)token.getValue();
-            int prec = OPPrec.get(op);
-            int nextMinPrec = prec + 1;
-            analyseExpression(nextMinPrec);
-            instructions.add(new Instruction(String2OP.get(op)));
         }
     }
 
@@ -292,5 +295,7 @@ public final class testAnalyser {
         var tokenizer = new Tokenizer(iter);
         testAnalyser analyser = new testAnalyser(tokenizer);
         analyser.analyseExpression(1);
+
+        System.out.println("finish");
     }
 }
