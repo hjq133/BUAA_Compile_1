@@ -7,11 +7,14 @@ import miniplc0java.error.ExpectedTokenError;
 import miniplc0java.error.TokenizeError;
 import miniplc0java.instruction.Instruction;
 import miniplc0java.instruction.Operation;
+import miniplc0java.tokenizer.StringIter;
 import miniplc0java.tokenizer.Token;
 import miniplc0java.tokenizer.TokenType;
 import miniplc0java.tokenizer.Tokenizer;
 import miniplc0java.util.Pos;
 import org.checkerframework.checker.units.qual.C;
+
+import java.io.*;
 
 import java.util.*;
 
@@ -33,36 +36,10 @@ public final class testAnalyser {
     /**
      * 优先矩阵表
      */
-    HashMap<String, Integer> OPPrec = new HashMap<>(){
-        {
-            OPPrec.put("*", 3);
-            OPPrec.put("/", 3);
-            OPPrec.put("+", 2);
-            OPPrec.put("-", 2);
-            OPPrec.put(">", 1);
-            OPPrec.put("<", 1);
-            OPPrec.put(">=", 1);
-            OPPrec.put("<=", 1);
-            OPPrec.put("==", 1);
-            OPPrec.put("!=", 1);
-        }
-    };
+    HashMap<String, Integer> OPPrec = new HashMap<String, Integer>();
 
-    HashMap<String, Operation> String2OP = new HashMap<>(){
-        {
-            String2OP.put("*", Operation.MUL);
-            String2OP.put("/", Operation.DIV);
-            String2OP.put("+", Operation.ADD);
-            String2OP.put("-", Operation.SUB);
-            String2OP.put(">", Operation.GT);
-            String2OP.put("<", Operation.LT);
-            String2OP.put(">=", Operation.LE);
-            String2OP.put("<=", Operation.GE);
-            String2OP.put("==", Operation.EQ);
-            String2OP.put("!=", Operation.NEQ);
-        }
-    };
-    
+    HashMap<String, Operation> String2OP = new HashMap<>();
+
     /**
      * 下一个变量的栈偏移
      */
@@ -71,6 +48,28 @@ public final class testAnalyser {
     public testAnalyser(Tokenizer tokenizer) {
         this.tokenizer = tokenizer;
         this.instructions = new ArrayList<>();
+
+        this.OPPrec.put("*", 3);
+        this.OPPrec.put("/", 3);
+        this.OPPrec.put("+", 2);
+        this.OPPrec.put("-", 2);
+        this.OPPrec.put(">", 1);
+        this.OPPrec.put("<", 1);
+        this.OPPrec.put(">=", 1);
+        this.OPPrec.put("<=", 1);
+        this.OPPrec.put("==", 1);
+        this.OPPrec.put("!=", 1);
+
+        this.String2OP.put("*", Operation.MUL);
+        this.String2OP.put("/", Operation.DIV);
+        this.String2OP.put("+", Operation.ADD);
+        this.String2OP.put("-", Operation.SUB);
+        this.String2OP.put(">", Operation.GT);
+        this.String2OP.put("<", Operation.LT);
+        this.String2OP.put(">=", Operation.LE);
+        this.String2OP.put("<=", Operation.GE);
+        this.String2OP.put("==", Operation.EQ);
+        this.String2OP.put("!=", Operation.NEQ);
     }
 
     /**
@@ -267,8 +266,31 @@ public final class testAnalyser {
             int prec = OPPrec.get(op);
             int nextMinPrec = prec + 1;
             analyseExpression(nextMinPrec);
-            instructions.add(new Instruction())
+            instructions.add(new Instruction(String2OP.get(op)));
         }
     }
 
+    public static void main(String[] args) throws Exception {
+//        FileInputStream fis = null;
+//        InputStreamReader isr = null;
+//        BufferedReader br = null; //用于包装InputStreamReader,提高处理性能。因为BufferedReader有缓冲的，而InputStreamReader没有。
+//        String str = "";
+//        String str1 = "";
+//        fis = new FileInputStream("/Users/huangjunqin/Desktop/data.txt");// FileInputStream
+//        // 从文件系统中的某个文件中获取字节
+//        isr = new InputStreamReader(fis);// InputStreamReader 是字节流通向字符流的桥梁,
+//        br = new BufferedReader(isr);// 从字符输入流中读取文件中的内容,封装了一个new InputStreamReader的对象
+//        str = br.readLine();
+//
+//        System.out.println(str);
+        InputStream input;
+        input = new FileInputStream("/Users/huangjunqin/Desktop/data.txt");
+
+        Scanner scanner;
+        scanner = new Scanner(input);
+        var iter = new StringIter(scanner);
+        var tokenizer = new Tokenizer(iter);
+        testAnalyser analyser = new testAnalyser(tokenizer);
+        analyser.analyseExpression(1);
+    }
 }

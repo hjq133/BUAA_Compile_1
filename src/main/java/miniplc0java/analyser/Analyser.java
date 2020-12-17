@@ -17,52 +17,52 @@ import java.util.*;
 
 public final class Analyser {
 
-//    Tokenizer tokenizer;
-//    ArrayList<Instruction> instructions;
-//
-//    /**
-//     * 当前偷看的 token
-//     */
-//    Token peekedToken = null;
-//
-//    /**
-//     * 符号表
-//     */
-//    HashMap<String, SymbolEntry> symbolTable = new HashMap<>();
-//
-//    /**
-//     * 优先矩阵表
-//     */
-//    HashMap<String, Integer> OPPrec = new HashMap<>(){
-//        {
-//            OPPrec.put("*", 3);
-//            OPPrec.put("/", 3);
-//            OPPrec.put("+", 2);
-//            OPPrec.put("-", 2);
-//            OPPrec.put(">", 1);
-//            OPPrec.put("<", 1);
-//            OPPrec.put(">=", 1);
-//            OPPrec.put("<=", 1);
-//            OPPrec.put("==", 1);
-//            OPPrec.put("!=", 1);
-//        }
-//    };
-//
-//    /**
-//     * 下一个变量的栈偏移
-//     */
-//    int nextOffset = 0;
-//
-//    public Analyser(Tokenizer tokenizer) {
-//        this.tokenizer = tokenizer;
-//        this.instructions = new ArrayList<>();
-//    }
-//
-//    public List<Instruction> analyse() throws CompileError {
-//        analyseProgram();
-//        return instructions;
-//    }
-//
+    Tokenizer tokenizer;
+    ArrayList<Instruction> instructions;
+
+    /**
+     * 当前偷看的 token
+     */
+    Token peekedToken = null;
+
+    /**
+     * 符号表
+     */
+    HashMap<String, SymbolEntry> symbolTable = new HashMap<>();
+
+    /**
+     * 优先矩阵表
+     */
+    HashMap<String, Integer> OPPrec = new HashMap<>(){
+        {
+            OPPrec.put("*", 3);
+            OPPrec.put("/", 3);
+            OPPrec.put("+", 2);
+            OPPrec.put("-", 2);
+            OPPrec.put(">", 1);
+            OPPrec.put("<", 1);
+            OPPrec.put(">=", 1);
+            OPPrec.put("<=", 1);
+            OPPrec.put("==", 1);
+            OPPrec.put("!=", 1);
+        }
+    };
+
+    /**
+     * 下一个变量的栈偏移
+     */
+    int nextOffset = 0;
+
+    public Analyser(Tokenizer tokenizer) {
+        this.tokenizer = tokenizer;
+        this.instructions = new ArrayList<>();
+    }
+
+    public List<Instruction> analyse() throws CompileError {
+        //analyseProgram();
+        return instructions;
+    }
+
 //    /**
 //     * 查看下一个 Token
 //     *
