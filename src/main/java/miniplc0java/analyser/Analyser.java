@@ -442,10 +442,36 @@ public final class Analyser {
     }
 
     private void analyseExpression() throws CompileError {
-        
+        if(check(TokenType.Ident)) {
+            var nameToken = expect(TokenType.Ident);
+            if(nextIf(TokenType.Eq) != null) {  // assign_expr -> IDENT '=' expr
+                analyseExpression();
+            } else if(nextIf(TokenType.LParen) != null) {  // call_expr -> IDENT '(' call_param_list? ')'
+                if(check(TokenType.RParen)) {
+                    expect(TokenType.RParen);
+                }else {
+                    analyseCallParamList();
+                }
+            } else {  // IDENT TODO 查符号表看有没有
+
+            }
+        } else if(check(TokenType.Minus)) {  // negate_expr -> '-' expr
+            expect(TokenType.Minus);
+            analyseExpression();
+        } else if(check(TokenType.LParen)) {  // group_expr -> '(' expr ')'
+            expect(TokenType.LParen);
+            analyseExpression();
+            expect(TokenType.RParen);
+        }
     }
 
 
+    private void analyseCallParamList() throws CompileError {
+        analyseExpression();
+        while(nextIf(TokenType.Comma) != null) {
+            analyseExpression();
+        }
+    }
 
     //<语句序列> ::= {<语句>}
     private void analyseStatementSequence() throws CompileError {

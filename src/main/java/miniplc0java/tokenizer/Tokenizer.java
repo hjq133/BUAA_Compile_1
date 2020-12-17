@@ -56,6 +56,10 @@ public class Tokenizer {
             return lexUInt();
         } else if (Character.isAlphabetic(peek)) {
             return lexIdentOrKeyword();
+        } else if(peek == '\'') {
+            return lexChar();
+        } else if(peek == '\"') {
+            return lexString()
         } else {
             return lexOperatorOrUnknown();
         }
@@ -89,22 +93,64 @@ public class Tokenizer {
     }
 
     // Todo new 检查是否是string
-        private Token lexString() throws TokenizeError {
+    private Token lexString() throws TokenizeError {
         String val = "";
         char peek = it.peekChar();
         Pos begin = it.currentPos();
-        if (peek  != '"') {
+        if (peek  != '\"') {
             throw new TokenizeError(ErrorCode.InvalidInput, begin);
         }
         it.nextChar();
         peek = it.peekChar();
-        while(peek != '"') {
+        while(peek != '\"') { // TODO 如何停止，'''和'\''的区别？
             it.nextChar();
+            if(peek == '\\') {  // 转义字符
+                val = val + peek;
+                peek = it.peekChar();
+                if(peek == '\\' || peek == '\"' || peek == '\'' || peek == 'n' || peek == 'r' || peek == 't') {
+                    it.nextChar();
+                }else {
+                    throw new TokenizeError(ErrorCode.InvalidInput, begin);
+                }
+            }
             val = val + peek;
             peek = it.peekChar();
         }
         Pos end = it.currentPos();
         return new Token(TokenType.String, val, begin, end);
+    }
+
+    // Todo new 检查是否是Char
+    private Token lexChar() throws TokenizeError {
+        String val = " ";
+        char peek = it.peekChar();
+        Pos begin = it.currentPos();
+        if (peek  != '\'') {
+            throw new TokenizeError(ErrorCode.InvalidInput, begin);
+        }
+        it.nextChar();
+        peek = it.peekChar();
+        if(peek == '\\') {
+            val = val + peek;
+            it.nextChar();
+            peek = it.peekChar();
+            if(peek == '\\' || peek == '\"' || peek == '\'' || peek == 'n' || peek == 'r' || peek == 't') {
+                val = val + peek;
+                it.nextChar();
+            } else {
+                throw new TokenizeError(ErrorCode.InvalidInput, begin);
+            }
+        } else {
+            val = val + peek;
+            it.nextChar();
+        }
+        peek = it.peekChar();
+        if(peek != '\'') {
+            throw new TokenizeError(ErrorCode.InvalidInput, begin);
+        }
+        it.nextChar();
+        Pos end = it.currentPos();
+        return new Token(TokenType.Char, val, begin, end);
     }
 
     // TODO done!

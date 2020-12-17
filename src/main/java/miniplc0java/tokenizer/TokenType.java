@@ -23,6 +23,7 @@ public enum TokenType {
     Ident,
     Uint,
     String,
+    Char,
 
     /** 运算符 */
     /** 加号 */
@@ -85,6 +86,8 @@ public enum TokenType {
                 return "UnsignedInteger";
             case String:
                 return "String";
+            case Char:
+                return "Char";
             case Ty:
                 return "ty";
 
