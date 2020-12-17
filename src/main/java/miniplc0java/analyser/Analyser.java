@@ -31,6 +31,26 @@ public final class Analyser {
     HashMap<String, SymbolEntry> symbolTable = new HashMap<>();
 
     /**
+     * 优先矩阵表
+     */
+    HashMap<String, Integer> OPPrec = new HashMap<>(){
+        {
+            OPPrec.put("as", 4);
+            OPPrec.put("*", 3);
+            OPPrec.put("/", 3);
+            OPPrec.put("+", 2);
+            OPPrec.put("-", 2);
+            OPPrec.put(">", 1);
+            OPPrec.put("<", 1);
+            OPPrec.put(">=", 1);
+            OPPrec.put("<=", 1);
+            OPPrec.put("==", 1);
+            OPPrec.put("!=", 1);
+            OPPrec.put("=", 0);
+        }
+    };
+
+    /**
      * 下一个变量的栈偏移
      */
     int nextOffset = 0;
@@ -441,19 +461,20 @@ public final class Analyser {
         }
     }
 
-    private void analyseExpression() throws CompileError {
+    private int analyseExpression() throws CompileError {
         if(check(TokenType.Ident)) {
             var nameToken = expect(TokenType.Ident);
             if(nextIf(TokenType.Eq) != null) {  // assign_expr -> IDENT '=' expr
-                analyseExpression();
+                return analyseExpression();
             } else if(nextIf(TokenType.LParen) != null) {  // call_expr -> IDENT '(' call_param_list? ')'
                 if(check(TokenType.RParen)) {
                     expect(TokenType.RParen);
                 }else {
                     analyseCallParamList();
                 }
+                return 1; // TODO 返回call的结果？
             } else {  // IDENT TODO 查符号表看有没有
-
+                
             }
         } else if(check(TokenType.Minus)) {  // negate_expr -> '-' expr
             expect(TokenType.Minus);
@@ -462,6 +483,30 @@ public final class Analyser {
             expect(TokenType.LParen);
             analyseExpression();
             expect(TokenType.RParen);
+        } else { // literal_expr -> UINT_LITERAL | DOUBLE_LITERAL | STRING_LITERAL | CHAR_LITERAL
+            if(check(TokenType.Uint)) {
+                var token = expect(TokenType.Uint);
+                int value = (int)token.getValue();
+                instructions.add(new Instruction(Operation.LIT, value));
+            } else if(check(TokenType.String)) {
+                var token = expect(TokenType.String);
+                String value = (String)token.getValue();
+                instructions.add(new Instruction(Operation., value));  // TODO 符号
+            } else if(check(TokenType.Char)) {
+                var token = expect(TokenType.Char);
+                String value = (String)token.getValue();
+                instructions.add(new Instruction(Operation., value));  // TODO 符号
+            } else {
+                throw new ExpectedTokenError(List.of(TokenType.Ident, TokenType.Uint, TokenType.LParen), next());
+            }
+        }
+
+        if(check(TokenType.AS_KW)) { // as_expr -> expr 'as' ty
+            expect(TokenType.AS_KW);
+            var type = expect(TokenType.Ty);
+            // TODO
+        } else { // operator_expr -> expr binary_operator expr
+
         }
     }
 
@@ -470,6 +515,34 @@ public final class Analyser {
         analyseExpression();
         while(nextIf(TokenType.Comma) != null) {
             analyseExpression();
+        }
+    }
+
+
+    private int computeExpr(int min_prec) throws CompileError {
+        int atom_lhs = computeAtom();
+
+        while(true) {
+            var token = next();
+            if (OPPrec.get(token.getValue()) < min_prec) {
+                break;
+            }
+            String op = (String)token.getValue();
+            int prec = OPPrec.get(op);
+            int next_min_prec = prec + 1;
+            if(op == "=") {
+                next_min_prec = prec;
+            }
+            int atom_rhs = computeExpr(next_min_prec);
+            atom_lhs = computeOp(atom_lhs, op, atom_rhs);
+        }
+        return atom_lhs;
+    }
+
+    private int computeAtom() throws CompileError {
+        if(nextIf(TokenType.LParen) != null) {
+            computeExpr(1);
+            expect(TokenType.RParen);
         }
     }
 

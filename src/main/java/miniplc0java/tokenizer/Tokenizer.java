@@ -59,7 +59,7 @@ public class Tokenizer {
         } else if(peek == '\'') {
             return lexChar();
         } else if(peek == '\"') {
-            return lexString()
+            return lexString();
         } else {
             return lexOperatorOrUnknown();
         }
