@@ -5,15 +5,23 @@ import java.util.Objects;
 public class Instruction {
     private Operation opt;
     Integer x;
+    String y;
 
     public Instruction(Operation opt) {
         this.opt = opt;
         this.x = 0;
+        this.y = null;
     }
 
     public Instruction(Operation opt, Integer x) {
         this.opt = opt;
         this.x = x;
+        this.y = null;
+    }
+
+    public Instruction(Operation opt, String y) {
+        this.opt = opt;
+        this.y = y;
     }
 
     public Instruction() {
@@ -65,6 +73,7 @@ public class Instruction {
             case LIT:
             case LOD:
             case STO:
+                if(this.y != null) return String.format("%s %s", this.opt, this.y);
                 return String.format("%s %s", this.opt, this.x);
             default:
                 return "ILL";
