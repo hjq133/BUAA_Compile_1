@@ -11,6 +11,7 @@ import miniplc0java.tokenizer.Token;
 import miniplc0java.tokenizer.TokenType;
 import miniplc0java.tokenizer.Tokenizer;
 import miniplc0java.util.Pos;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.*;
 
@@ -359,21 +360,85 @@ public final class Analyser {
      */
     private void analyseBlockStatement() throws CompileError {
         expect(TokenType.LBrace);
-        while
+        while(true) {
+            if(check(TokenType.RBrace)){
+                break;
+            }else {
+                analyseStatement();
+            }
+        }
+        expect(TokenType.RBrace);
     }
 
     /**
         stmt ->
             expr_stmt
-            | decl_stmt
-            | if_stmt
-            | while_stmt
-            | return_stmt
-            | block_stmt
-            | empty_stmt
+            | decl_stmt 'let' | 'const'
+            | if_stmt  'if'
+            | while_stmt  'while'
+            | return_stmt  'return'
+            | block_stmt  '{'
+            | empty_stmt  ';'
      */
     private void analyseStatement() throws CompileError {
+        if(check(TokenType.IF_KW)) {
+            analyseIfStatement();
+        } else if(check(TokenType.WHILE_KW)) {
+            analyseWhileStatement();
+        } else if(check(TokenType.RETURN_KW)) {
+            analyseReturnStatement();
+        } else if(check(TokenType.LET_KW) || check(TokenType.CONST_KW)) {
+            analyseDeclareStatement();
+        } else if(check(TokenType.LBrace)) {
+            analyseBlockStatement();
+        } else if(check(TokenType.Semicolon)) {
+            expect(TokenType.Semicolon);
+        } else {
+            analyseExpressionStatement();
+        }
+    }
 
+
+    /**
+     * expr_stmt -> expr ';'
+     */
+    private void analyseExpressionStatement() throws CompileError{
+        analyseExpression();
+        expect(TokenType.Semicolon);
+    }
+
+    /**
+     * if_stmt -> 'if' expr block_stmt ('else' (block_stmt | if_stmt))?
+     */
+    private void analyseIfStatement() throws CompileError {
+        expect(TokenType.IF_KW);
+        analyseExpression();
+        analyseBlockStatement();
+        if(nextIf(TokenType.ELSE_KW) != null) {
+            if(check(TokenType.IF_KW)) {
+                analyseIfStatement();
+            }
+            else {
+                analyseBlockStatement();
+            }
+        }
+    }
+
+    /**
+     * while_stmt -> 'while' expr block_stmt
+     * TODO 需要根据条件判断吗
+     */
+    private void analyseWhileStatement() throws CompileError {
+        expect(TokenType.WHILE_KW);
+        analyseExpression(); // condition
+        analyseBlockStatement();
+    }
+
+    private void analyseReturnStatement() throws CompileError {
+        expect(TokenType.RETURN_KW);
+        if(nextIf(TokenType.Semicolon) == null) {
+            analyseExpression();
+        }
     }
 
     private void analyseExpression() throws CompileError {
@@ -422,7 +487,6 @@ public final class Analyser {
         if (negative) {
             value = -value;
         }
-
         return value;
     }
 
