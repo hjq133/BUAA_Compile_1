@@ -1,12 +1,15 @@
 package miniplc0java.analyser;
 
+import miniplc0java.tokenizer.Token;
+import miniplc0java.tokenizer.TokenType;
+
 public class SymbolEntry {
     boolean isConstant;
     boolean isInitialized;
     int stackOffset;
-    int type;  // 0表示int，1表示char，2表示string
+    TokenType type;
 
-    public SymbolEntry(boolean isConstant, boolean isDeclared, int stackOffset, int type) {
+    public SymbolEntry(boolean isConstant, boolean isDeclared, int stackOffset, TokenType type) {
         this.isConstant = isConstant;
         this.isInitialized = isDeclared;
         this.stackOffset = stackOffset;

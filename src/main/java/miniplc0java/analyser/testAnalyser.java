@@ -163,11 +163,11 @@ public final class testAnalyser {
      * @param curPos        当前 token 的位置（报错用）
      * @throws AnalyzeError 如果重复定义了则抛异常
      */
-    private void addSymbol(String name, boolean isInitialized, boolean isConstant, Pos curPos, int type) throws AnalyzeError {
+    private void addSymbol(String name, boolean isInitialized, boolean isConstant, Pos curPos, Token typeToken) throws AnalyzeError {
         if (this.symbolTable.get(name) != null) {
             throw new AnalyzeError(ErrorCode.DuplicateDeclaration, curPos);
         } else {
-            this.symbolTable.put(name, new SymbolEntry(isConstant, isInitialized, getNextVariableOffset(), type));
+            this.symbolTable.put(name, new SymbolEntry(isConstant, isInitialized, getNextVariableOffset(), typeToken.getTokenType()));
         }
     }
 
