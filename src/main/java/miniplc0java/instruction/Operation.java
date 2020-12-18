@@ -17,5 +17,6 @@ public enum Operation {
     GE, // >=
     CALL,
     STACKALLOC,
+    JUMP,
     WRT
 }

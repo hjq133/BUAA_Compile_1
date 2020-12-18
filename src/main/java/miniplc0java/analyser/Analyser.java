@@ -189,7 +189,9 @@ public final class Analyser {
      * @param curPos        当前 token 的位置（报错用）
      * @throws AnalyzeError 如果重复定义了则抛异常
      */
-    private void addSymbol(String name, boolean isInitialized, boolean isConstant, Pos curPos, Token typeToken, HashMap<String, SymbolEntry> symbolTable) throws AnalyzeError {
+    private void addSymbol(String name, boolean isInitialized, boolean isConstant, Pos curPos, Token typeToken) throws AnalyzeError {
+        // 默认加入当前的符号表
+        HashMap<String, SymbolEntry> symbolTable = indexTable.get(indexTable.size() - 1);
         if (symbolTable.get(name) != null) {
             throw new AnalyzeError(ErrorCode.DuplicateDeclaration, curPos);
         } else {
@@ -301,7 +303,7 @@ public final class Analyser {
         if (nextIf(TokenType.Eq) != null) {
             // 分析初始化的表达式
             initialized = true;
-            analyseExpression();
+            analyseExpression(1);
         }
 
         // 分号
@@ -465,15 +467,26 @@ public final class Analyser {
     private void analyseIfStatement() throws CompileError {
         expect(TokenType.IF_KW);
         analyseExpression(1);
+        instructions.add(new Instruction(Operation.JUMP, 0)); // jump 到 else 处
+        int index1 = instructions.size() - 1;
+
         analyseBlockStatement();
+        instructions.add(new Instruction(Operation.JUMP, 0)); // jump 到 最后
+        int index2 = instructions.size() - 1;
+
         if(nextIf(TokenType.ELSE_KW) != null) {
             if(check(TokenType.IF_KW)) {
                 analyseIfStatement();
             }
             else {
+                var offset = getNextVariableOffset(); // 获取下一个地址的offset
+                instructions.set(index1, new Instruction(Operation.JUMP, offset));
                 analyseBlockStatement();
             }
         }
+        
+        var offset = getNextVariableOffset();
+        instructions.set(index2, new Instruction(Operation.JUMP, offset));
     }
 
     /**
@@ -532,7 +545,7 @@ public final class Analyser {
                     analyseCallParamList();
                     instructions.add(new Instruction(Operation.CALL));
                 }
-            } else {  // IDENT TODO 查符号表看有没有, 然后压入栈
+            } else {  // IDENT
                 var symbol = findSymbol(name);
                 if (symbol == null) {
                     // 没有这个标识符
@@ -544,8 +557,7 @@ public final class Analyser {
                     // 标识符是函数
                     throw new AnalyzeError(ErrorCode.ExpectedVariableOrConstant, nameToken.getStartPos());
                 }
-                var offset = getOffset(name, nameToken.getStartPos());
-                System.out.println("LOD");
+                var offset = symbol.getStackOffset();
                 instructions.add(new Instruction(Operation.LOD, offset));
             }
         } else if(check(TokenType.Minus)) {  // negate_expr -> '-' expr
