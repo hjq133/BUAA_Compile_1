@@ -15,5 +15,6 @@ public enum Operation {
     GT, // >
     LE, // <=
     GE, // >=
+    CALL,
     WRT
 }

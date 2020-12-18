@@ -477,8 +477,8 @@ public final class Analyser {
                 if(check(TokenType.RParen)) {
                     expect(TokenType.RParen);
                 }else {
-//                    analyseCallParamList();
-                    System.out.println("TODO analyse call param list");
+                    analyseCallParamList();
+                    instructions.add(new Instruction(Operation.CALL));
                 }
             } else {  // IDENT TODO 查符号表看有没有, 然后压入栈
                 // var offset = getOffset(name, nameToken.getStartPos());
@@ -543,32 +543,18 @@ public final class Analyser {
     }
 
 
-//    private void computeExpr(int min_prec) throws CompileError {
-//        computeAtom();  // 压栈 atom_lhs
-//
-//        while(true) {
-//            var token = next();
-//            if (OPPrec.get(token.getValue()) < min_prec) {
-//                break;
-//            }
-//            String op = (String)token.getValue();
-//            int prec = OPPrec.get(op);
-//            int next_min_prec = prec + 1;
-//            if(op == "=") {
-//                next_min_prec = prec;
-//            }
-//            computeExpr(next_min_prec);  // 压栈 atom_rhs
-//            instructions.add(op); // 压栈 op
-//        }
-//    }
-//
-//    private int computeAtom() throws CompileError {
-//        if(nextIf(TokenType.LParen) != null) {
-//            computeExpr(1);
-//            expect(TokenType.RParen);
-//        }
-//    }
 
+
+
+
+
+
+
+
+
+
+
+    /* ----------------- 之前的 ----------------- */
     //<语句序列> ::= {<语句>}
     private void analyseStatementSequence() throws CompileError {
         // 语句序列 -> 语句*
