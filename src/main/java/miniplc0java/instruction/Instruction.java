@@ -73,6 +73,7 @@ public class Instruction {
             case LIT:
             case LOD:
             case STO:
+            case STACKALLOC:
                 if(this.y != null) return String.format("%s %s", this.opt, this.y);
                 return String.format("%s %s", this.opt, this.x);
             default:

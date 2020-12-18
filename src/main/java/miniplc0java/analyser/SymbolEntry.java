@@ -6,6 +6,7 @@ import miniplc0java.tokenizer.TokenType;
 public class SymbolEntry {
     boolean isConstant;
     boolean isInitialized;
+    boolean isFunction;
     int stackOffset;
     TokenType type;
 
@@ -14,6 +15,15 @@ public class SymbolEntry {
         this.isInitialized = isDeclared;
         this.stackOffset = stackOffset;
         this.type = type;
+        this.isFunction = false;
+    }
+
+    public SymbolEntry(boolean isConstant, boolean isDeclared, int stackOffset, TokenType type, boolean isFunction) {
+        this.isConstant = isConstant;
+        this.isInitialized = isDeclared;
+        this.stackOffset = stackOffset;
+        this.type = type;
+        this.isFunction = isFunction;
     }
 
     /**

@@ -16,5 +16,6 @@ public enum Operation {
     LE, // <=
     GE, // >=
     CALL,
+    STACKALLOC,
     WRT
 }
