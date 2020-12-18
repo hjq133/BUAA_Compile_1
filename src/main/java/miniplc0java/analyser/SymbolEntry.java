@@ -7,30 +7,20 @@ public class SymbolEntry {
     boolean isConstant;
     boolean isInitialized;
     boolean isFunction;
-    int stackOffset;
     TokenType type;
 
-    public SymbolEntry(boolean isConstant, boolean isDeclared, int stackOffset, TokenType type) {
+    public SymbolEntry(boolean isConstant, boolean isDeclared, TokenType type) {
         this.isConstant = isConstant;
         this.isInitialized = isDeclared;
-        this.stackOffset = stackOffset;
         this.type = type;
         this.isFunction = false;
     }
 
-    public SymbolEntry(boolean isConstant, boolean isDeclared, int stackOffset, TokenType type, boolean isFunction) {
+    public SymbolEntry(boolean isConstant, boolean isDeclared, TokenType type, boolean isFunction) {
         this.isConstant = isConstant;
         this.isInitialized = isDeclared;
-        this.stackOffset = stackOffset;
         this.type = type;
         this.isFunction = isFunction;
-    }
-
-    /**
-     * @return the stackOffset
-     */
-    public int getStackOffset() {
-        return stackOffset;
     }
 
     /**
@@ -59,12 +49,5 @@ public class SymbolEntry {
      */
     public void setInitialized(boolean isInitialized) {
         this.isInitialized = isInitialized;
-    }
-
-    /**
-     * @param stackOffset the stackOffset to set
-     */
-    public void setStackOffset(int stackOffset) {
-        this.stackOffset = stackOffset;
     }
 }
