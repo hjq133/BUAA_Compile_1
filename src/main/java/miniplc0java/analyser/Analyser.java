@@ -484,7 +484,7 @@ public final class Analyser {
                 analyseBlockStatement();
             }
         }
-        
+
         var offset = getNextVariableOffset();
         instructions.set(index2, new Instruction(Operation.JUMP, offset));
     }
@@ -496,7 +496,16 @@ public final class Analyser {
     private void analyseWhileStatement() throws CompileError {
         expect(TokenType.WHILE_KW);
         analyseExpression(1); // condition
+        instructions.add(new Instruction(Operation.JUMP, 0)); // jump 到 while 外面
+        int index1 = instructions.size() - 1;
+
         analyseBlockStatement();
+
+        instructions.add(new Instruction(Operation.NOCONJUMP, 0)); // 无条件跳转到while开头
+        //var offset = getNextVariableOffset();
+
+        instructions.set(index1, new Instruction(Operation.JUMP, offset));
+
     }
 
     private void analyseReturnStatement() throws CompileError {

@@ -17,6 +17,7 @@ public enum Operation {
     GE, // >=
     CALL,
     STACKALLOC,
-    JUMP,
+    JUMP, // 条件跳转
+    NOCONJUMP, // 无条件跳转
     WRT
 }
