@@ -167,7 +167,7 @@ public final class testAnalyser {
         if (this.symbolTable.get(name) != null) {
             throw new AnalyzeError(ErrorCode.DuplicateDeclaration, curPos);
         } else {
-            this.symbolTable.put(name, new SymbolEntry(isConstant, isInitialized, getNextVariableOffset(), typeToken.getTokenType()));
+            this.symbolTable.put(name, new SymbolEntry(isConstant, isInitialized, typeToken.getTokenType()));
         }
     }
 
@@ -200,7 +200,7 @@ public final class testAnalyser {
         if (entry == null) {
             throw new AnalyzeError(ErrorCode.NotDeclared, curPos);
         } else {
-            return entry.getStackOffset();
+            return 0;
         }
     }
 

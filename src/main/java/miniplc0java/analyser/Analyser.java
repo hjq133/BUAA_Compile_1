@@ -482,7 +482,6 @@ public final class Analyser {
     }
 
     private void analyseExpression(int minPrec) throws CompileError {
-
         if(check(TokenType.Ident)) {
             var nameToken = expect(TokenType.Ident);
             String name = (String) nameToken.getValue();
